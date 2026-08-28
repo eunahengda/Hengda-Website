@@ -272,6 +272,29 @@ export const strings = {
       zh: "以下是我们车间加工、焊接与制造作品的部分展示，图片仅供参考。若需了解特定行业的实际案例，欢迎与我们联系。",
     },
   },
+  projectsPage: {
+    eyebrow: { en: "Projects", zh: "项目案例" },
+    title: { en: "Completed Projects", zh: "已完成项目" },
+    description: {
+      en: "Real machining, fabrication, and repair projects delivered for manufacturers across Malaysia, organised by the industry they were made for.",
+      zh: "以下是我们为马来西亚各行业制造商完成的实际加工、制造与维修项目，依服务行业分类整理。",
+    },
+    noProjects: {
+      en: "Projects are being added to this page — check back soon, or contact us directly for references.",
+      zh: "项目案例正在陆续上传中，请稍后查看，或直接联系我们索取案例参考。",
+    },
+    viewProject: { en: "View Project", zh: "查看项目" },
+  },
+  projectDetail: {
+    backToProjects: { en: "Back to Projects", zh: "返回项目列表" },
+    aboutHeading: { en: "About This Project", zh: "项目详情" },
+    industryLabel: { en: "Industry", zh: "服务行业" },
+    materialLabel: { en: "Material", zh: "材质" },
+    processLabel: { en: "Machine Process", zh: "加工工艺" },
+    beforeAfterHeading: { en: "Before & After", zh: "维修前后对比" },
+    beforeLabel: { en: "Before", zh: "维修前" },
+    afterLabel: { en: "After", zh: "维修后" },
+  },
   contactPage: {
     eyebrow: { en: "Contact Us", zh: "联系我们" },
     title: { en: "Get a Quotation", zh: "获取报价" },

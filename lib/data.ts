@@ -50,6 +50,7 @@ export const nav = [
   { label: "About Us", label_zh: "关于我们", href: "/about" },
   { label: "Services", label_zh: "服务项目", href: "/services" },
   { label: "Industries Served", label_zh: "服务行业", href: "/industries" },
+  { label: "Projects", label_zh: "项目案例", href: "/projects" },
   { label: "Gallery", label_zh: "作品图库", href: "/gallery" },
   { label: "Contact", label_zh: "联系我们", href: "/contact" },
 ];
