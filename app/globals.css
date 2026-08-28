@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-navy-900 font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading tracking-tight;
+  }
+  ::selection {
+    @apply bg-signal-500/30 text-navy-900;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-signal-500 ring-offset-2 ring-offset-navy-900;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-signal-500;
+  }
+
+  .section-pad {
+    @apply px-6 py-20 sm:px-10 lg:px-16 lg:py-28;
+  }
+
+  .container-max {
+    @apply mx-auto w-full max-w-7xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-signal-500 px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-signal-600;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-white/30 px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:border-white hover:bg-white/10;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-navy-900/25 px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-navy-900 transition-colors hover:border-navy-900 hover:bg-navy-900/5;
+  }
+
+  .hero-text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.55), 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+
+  .blueprint-corners {
+    position: relative;
+  }
+  .blueprint-corners::before,
+  .blueprint-corners::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-color: currentColor;
+    opacity: 0.6;
+  }
+  .blueprint-corners::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+  .blueprint-corners::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
