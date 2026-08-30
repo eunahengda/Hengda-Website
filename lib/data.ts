@@ -51,7 +51,6 @@ export const nav = [
   { label: "Services", label_zh: "服务项目", href: "/services" },
   { label: "Industries Served", label_zh: "服务行业", href: "/industries" },
   { label: "Projects", label_zh: "项目案例", href: "/projects" },
-  { label: "Gallery", label_zh: "作品图库", href: "/gallery" },
   { label: "Contact", label_zh: "联系我们", href: "/contact" },
 ];
 
@@ -406,127 +405,6 @@ export const machineCapabilities = [
   { label: "Max Turning Diameter", label_zh: "最大车削直径", value: "400", unit: "mm" },
   { label: "Milling Table Travel", label_zh: "铣床工作台行程", value: "1,000", unit: "mm" },
   { label: "Tolerance Achievable", label_zh: "可达公差", value: "±0.02", unit: "mm" },
-];
-
-export type GalleryItem = {
-  title: string;
-  title_zh: string;
-  industrySlug: string; // ties to `industries` above, used for the gallery filter
-  image: string;
-};
-
-// Each project photo is tagged with the industry it was made for, so a
-// visitor from (say) the packaging sector can filter the gallery down to
-// parts made for packaging clients specifically. Photos are free-license
-// Unsplash placeholders for now — see README for how to swap in real photos
-// of finished parts per industry (this is the single highest-impact photo
-// swap for building visitor confidence).
-export const galleryItems: GalleryItem[] = [
-  {
-    title: "Conveyor Shaft for Palm Oil Mill",
-    title_zh: "油棕厂输送带轴",
-    industrySlug: "palm-oil-agro",
-    image:
-      "https://images.unsplash.com/photo-1776090188130-26c7253ff423?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Reconditioned Press Bushing",
-    title_zh: "翻新压榨机轴套",
-    industrySlug: "palm-oil-agro",
-    image:
-      "https://images.unsplash.com/photo-1701448150058-43d6d199b103?auto=format&fit=crop&w=1200&q=80&crop=entropy",
-  },
-  {
-    title: "Food Processing Line Shaft",
-    title_zh: "食品加工线轴类零件",
-    industrySlug: "food-beverage",
-    image:
-      "https://images.unsplash.com/photo-1701448150058-43d6d199b103?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Beverage Filling Machine Bracket",
-    title_zh: "饮料灌装机支架",
-    industrySlug: "food-beverage",
-    image:
-      "https://images.unsplash.com/photo-1647586028042-1de4d4a935e6?auto=format&fit=crop&w=1200&q=80&crop=entropy",
-  },
-  {
-    title: "Packaging Machine Gear Component",
-    title_zh: "包装机齿轮零件",
-    industrySlug: "consumer-goods-packaging",
-    image:
-      "https://images.unsplash.com/photo-1701448150058-43d6d199b103?auto=format&fit=crop&w=1200&q=80&crop=entropy&sat=-10",
-  },
-  {
-    title: "Custom Bracket for Packing Line",
-    title_zh: "包装线定制支架",
-    industrySlug: "consumer-goods-packaging",
-    image:
-      "https://images.unsplash.com/photo-1776090188130-26c7253ff423?auto=format&fit=crop&w=1200&q=80&crop=entropy",
-  },
-  {
-    title: "Structural Bracket for Marine Equipment",
-    title_zh: "海事设备结构支架",
-    industrySlug: "oil-gas-marine",
-    image:
-      "https://images.unsplash.com/photo-1647586028042-1de4d4a935e6?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Welded Frame for Offshore Support Structure",
-    title_zh: "海上支撑结构焊接框架",
-    industrySlug: "oil-gas-marine",
-    image:
-      "https://images.unsplash.com/photo-1647586028042-1de4d4a935e6?auto=format&fit=crop&w=1200&q=80&crop=entropy&sat=-10",
-  },
-  {
-    title: "Precision Machined Housing",
-    title_zh: "精密加工外壳",
-    industrySlug: "industrial-electronics",
-    image:
-      "https://images.unsplash.com/photo-1701448150058-43d6d199b103?auto=format&fit=crop&w=1200&q=80&crop=entropy&sat=-20",
-  },
-  {
-    title: "Custom Jig for Production Line",
-    title_zh: "生产线定制治具",
-    industrySlug: "industrial-electronics",
-    image:
-      "https://images.unsplash.com/photo-1776090188130-26c7253ff423?auto=format&fit=crop&w=1200&q=80&sat=-10",
-  },
-  {
-    title: "Container Handling Equipment Part",
-    title_zh: "货柜搬运设备零件",
-    industrySlug: "logistics-terminal",
-    image:
-      "https://images.unsplash.com/photo-1776090188130-26c7253ff423?auto=format&fit=crop&w=1200&q=80&crop=entropy&sat=-20",
-  },
-  {
-    title: "Structural Repair for Port Equipment",
-    title_zh: "港口设备结构维修",
-    industrySlug: "logistics-terminal",
-    image:
-      "https://images.unsplash.com/photo-1647586028042-1de4d4a935e6?auto=format&fit=crop&w=1200&q=80&crop=entropy&sat=-20",
-  },
-];
-
-// "Repaired Products" gallery — a rotating showcase of before/after repair
-// work. Add new entries here (see README for how to add your own photos).
-export const repairGalleryItems = [
-  {
-    title: "Reconditioned Gearbox Housing",
-    title_zh: "翻新齿轮箱外壳",
-    note: "Worn housing reconditioned and returned to service.",
-    note_zh: "磨损外壳经翻新后重新投入使用。",
-    image:
-      "https://images.unsplash.com/photo-1701448150058-43d6d199b103?auto=format&fit=crop&w=1200&q=80&crop=entropy&sat=-20",
-  },
-  {
-    title: "Repaired Conveyor Shaft",
-    title_zh: "输送带轴修复",
-    note: "Shaft resurfaced and keyway rework completed on-site.",
-    note_zh: "现场完成轴表面修复与键槽重新加工。",
-    image:
-      "https://images.unsplash.com/photo-1776090188130-26c7253ff423?auto=format&fit=crop&w=1200&q=80&crop=entropy&sat=-20",
-  },
 ];
 
 export const contactSubjects = [

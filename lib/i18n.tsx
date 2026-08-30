@@ -65,7 +65,6 @@ export const strings = {
     about: { en: "About", zh: "关于我们" },
     services: { en: "Services", zh: "服务项目" },
     industries: { en: "Industries Served", zh: "服务行业" },
-    gallery: { en: "Gallery", zh: "作品图库" },
     getQuotation: { en: "Get Quotation", zh: "获取报价" },
     contactUs: { en: "Contact Us", zh: "联系我们" },
     searchPlaceholder: {
@@ -146,25 +145,6 @@ export const strings = {
     subtitle: {
       en: "Our work spans several manufacturing sectors across Johor and beyond, each with its own equipment, tolerances, and downtime pressures.",
       zh: "我们的服务涵盖柔佛及全马各制造领域，每个行业对设备、公差与停机时间都有不同的要求。",
-    },
-  },
-  gallery: {
-    eyebrow: { en: "Project Gallery", zh: "作品图库" },
-    heading: { en: "Work From the Shop Floor", zh: "来自车间的实际作品" },
-    viewFull: { en: "View Full Gallery", zh: "查看完整图库" },
-    filterHint: {
-      en: "Filter by your industry to see the kind of parts we've made for businesses like yours.",
-      zh: "按您的行业筛选，看看我们为同类企业制作过的零件。",
-    },
-    allIndustries: { en: "All Industries", zh: "全部行业" },
-    noResults: {
-      en: "No photos filed under this industry yet — ask us for references, we likely have relevant work to show you.",
-      zh: "此行业暂无图片，欢迎联系我们索取相关案例参考。",
-    },
-    repairHeading: { en: "Repaired Products Gallery", zh: "维修产品图库" },
-    repairSubtitle: {
-      en: "Before-and-after photos of equipment we've repaired and reconditioned for clients. This section is updated regularly — check back for the latest work.",
-      zh: "这里展示我们为客户维修与翻新设备的前后对比照片，会持续更新，欢迎不定期回来查看最新作品。",
     },
   },
   contactHelp: {
@@ -262,14 +242,6 @@ export const strings = {
     description: {
       en: "Different industries put different demands on a part — tolerance, material, hygiene, or turnaround. Here's where our work is most often put to use.",
       zh: "不同行业对零件的要求各不相同——公差、材质、卫生标准或交货速度。以下是我们最常服务的领域。",
-    },
-  },
-  galleryPage: {
-    eyebrow: { en: "Project Gallery", zh: "作品图库" },
-    title: { en: "A Look at Our Work", zh: "看看我们的作品" },
-    description: {
-      en: "A sample of machining, welding, and fabrication work from our workshop. Photos shown are representative of our process; ask us for references from your specific industry.",
-      zh: "以下是我们车间加工、焊接与制造作品的部分展示，图片仅供参考。若需了解特定行业的实际案例，欢迎与我们联系。",
     },
   },
   projectsPage: {

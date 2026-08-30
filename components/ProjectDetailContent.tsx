@@ -1,12 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import ScrollReveal from "@/components/ScrollReveal";
 import CTASection from "@/components/CTASection";
-import { urlFor } from "@/sanity/lib/image";
+import ImageLightbox from "@/components/ImageLightbox";
+import { urlFor, getImageAspectRatio } from "@/sanity/lib/image";
 import { MATERIAL_OPTIONS, MACHINE_PROCESS_OPTIONS } from "@/sanity/schemaTypes/options";
 import { useLanguage, strings } from "@/lib/i18n";
 import type { Project } from "@/sanity/lib/getProjects";
@@ -17,6 +19,7 @@ function labelFor(value: string, options: { title: string; value: string }[]) {
 
 export default function ProjectDetailContent({ project }: { project: Project }) {
   const { lang, t } = useLanguage();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const title = lang === "zh" ? project.title_zh : project.title;
   const beforeUrl = project.beforeImage?.asset
@@ -25,6 +28,16 @@ export default function ProjectDetailContent({ project }: { project: Project }) 
   const afterUrl = project.afterImage?.asset
     ? urlFor(project.afterImage).width(900).height(675).url()
     : null;
+
+  const galleryImages = project.images
+    .filter((image) => image.asset)
+    .map((image) => ({
+      url: urlFor(image).width(800).url(),
+      fullUrl: urlFor(image).width(1600).url(),
+      alt: (lang === "zh" ? image.alt_zh : image.alt) || title,
+      key: image._key,
+      aspectRatio: getImageAspectRatio(image),
+    }));
 
   return (
     <>
@@ -48,28 +61,35 @@ export default function ProjectDetailContent({ project }: { project: Project }) 
             <ArrowLeft className="h-4 w-4" /> {t(strings.projectDetail.backToProjects)}
           </Link>
 
-          {project.images.length > 0 && (
+          {galleryImages.length > 0 && (
             <ScrollReveal className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {project.images.map((image, i) => {
-                if (!image.asset) return null;
-                const url = urlFor(image).width(900).height(675).url();
-                return (
-                  <div
-                    key={image._key || i}
-                    className="relative aspect-[4/3] overflow-hidden rounded-sm bg-navy-900"
-                  >
-                    <Image
-                      src={url}
-                      alt={(lang === "zh" ? image.alt_zh : image.alt) || title}
-                      fill
-                      sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
-                );
-              })}
+              {galleryImages.map((image, i) => (
+                <button
+                  key={image.key || i}
+                  type="button"
+                  onClick={() => setLightboxIndex(i)}
+                  aria-label={`View larger image: ${image.alt}`}
+                  className="relative block w-full overflow-hidden rounded-sm bg-navy-900"
+                  style={{ aspectRatio: image.aspectRatio }}
+                >
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    fill
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    className="object-contain"
+                  />
+                </button>
+              ))}
             </ScrollReveal>
           )}
+
+          <ImageLightbox
+            images={galleryImages.map((image) => ({ url: image.fullUrl, alt: image.alt }))}
+            index={lightboxIndex}
+            onClose={() => setLightboxIndex(null)}
+            onNavigate={setLightboxIndex}
+          />
 
           <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">

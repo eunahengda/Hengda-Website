@@ -6,7 +6,6 @@ import CompanyIntro from "@/components/CompanyIntro";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import MachineCapabilities from "@/components/MachineCapabilities";
 import IndustriesGrid from "@/components/IndustriesGrid";
-import ProjectGallery from "@/components/ProjectGallery";
 import ContactHelp from "@/components/ContactHelp";
 import GoogleMap from "@/components/GoogleMap";
 import { getIndustryCategories } from "@/sanity/lib/getIndustries";
@@ -30,7 +29,6 @@ export default async function HomePage() {
       <WhyChooseUs />
       <MachineCapabilities />
       <IndustriesGrid industries={industries} />
-      <ProjectGallery compact />
       <ContactHelp />
       <GoogleMap />
     </>

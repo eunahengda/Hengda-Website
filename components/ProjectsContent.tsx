@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import ScrollReveal from "@/components/ScrollReveal";
 import CTASection from "@/components/CTASection";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor, getImageAspectRatio } from "@/sanity/lib/image";
 import { useLanguage, strings } from "@/lib/i18n";
 import type { Project } from "@/sanity/lib/getProjects";
 
@@ -32,7 +32,7 @@ export default function ProjectsContent({ projects }: { projects: Project[] }) {
               {projects.map((project, i) => {
                 const cover = project.images[0];
                 const coverUrl = cover?.asset
-                  ? urlFor(cover).width(800).height(600).url()
+                  ? urlFor(cover).width(800).url()
                   : null;
                 const title = lang === "zh" ? project.title_zh : project.title;
 
@@ -42,14 +42,17 @@ export default function ProjectsContent({ projects }: { projects: Project[] }) {
                       href={`/projects/${project.slug}`}
                       className="group block h-full overflow-hidden rounded-sm bg-steel-100 shadow-sm ring-1 ring-steel-200 transition-shadow hover:shadow-md"
                     >
-                      <div className="relative aspect-[4/3] overflow-hidden bg-navy-900">
+                      <div
+                        className="relative overflow-hidden bg-navy-900"
+                        style={{ aspectRatio: getImageAspectRatio(cover) }}
+                      >
                         {coverUrl && (
                           <Image
                             src={coverUrl}
                             alt={(lang === "zh" ? cover?.alt_zh : cover?.alt) || title}
                             fill
                             sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-contain transition-transform duration-500 group-hover:scale-105"
                           />
                         )}
                       </div>

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
-import Icon from "./Icon";
 import { industries as fallbackIndustries, type Industry } from "@/lib/data";
 import { useLanguage, strings } from "@/lib/i18n";
 
@@ -53,9 +52,6 @@ export default function IndustriesGrid({ industries = fallbackIndustries }: Indu
                     />
                   </div>
                 )}
-                <div className="flex h-11 w-11 items-center justify-center rounded-sm bg-navy-900 text-signal-500">
-                  <Icon name={ind.icon} className="h-5 w-5" />
-                </div>
                 <h3 className="mt-5 font-heading text-lg font-semibold uppercase text-navy-900">
                   {lang === "zh" ? ind.title_zh : ind.title}
                 </h3>
