@@ -22,6 +22,18 @@ export const ALL_INDUSTRY_CATEGORIES_QUERY = groq`
   }
 `;
 
+export const INDUSTRY_BY_SLUG_QUERY = groq`
+  *[_type == "industryCategory" && slug.current == $slug][0] {
+    _id,
+    title,
+    title_zh,
+    "slug": slug.current,
+    description,
+    description_zh,
+    "imageUrl": image.asset->url
+  }
+`;
+
 export const ALL_PROJECTS_QUERY = groq`
   *[_type == "project"] | order(featured desc, _createdAt desc) {
     _id,

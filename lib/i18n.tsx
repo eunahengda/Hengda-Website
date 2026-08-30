@@ -295,6 +295,18 @@ export const strings = {
     beforeLabel: { en: "Before", zh: "维修前" },
     afterLabel: { en: "After", zh: "维修后" },
   },
+  industryDetail: {
+    backToIndustries: { en: "Back to Industries", zh: "返回行业列表" },
+    projectsEyebrow: { en: "Projects", zh: "项目案例" },
+    projectsHeading: {
+      en: "Projects for {industry} Industry",
+      zh: "{industry}行业项目案例",
+    },
+    noProjects: {
+      en: "No projects have been added for this industry yet — contact us directly for references.",
+      zh: "该行业暂无项目案例，请直接联系我们索取参考案例。",
+    },
+  },
   contactPage: {
     eyebrow: { en: "Contact Us", zh: "联系我们" },
     title: { en: "Get a Quotation", zh: "获取报价" },

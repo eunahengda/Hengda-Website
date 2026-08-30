@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import ScrollReveal from "./ScrollReveal";
 import Icon from "./Icon";
 import { industries as fallbackIndustries, type Industry } from "@/lib/data";
@@ -37,7 +38,10 @@ export default function IndustriesGrid({ industries = fallbackIndustries }: Indu
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((ind, i) => (
             <ScrollReveal key={ind.slug} delay={i * 0.06}>
-              <div className="h-full rounded-sm bg-white p-7 shadow-sm ring-1 ring-steel-200">
+              <Link
+                href={`/industries/${ind.slug}`}
+                className="group block h-full rounded-sm bg-white p-7 shadow-sm ring-1 ring-steel-200 transition-shadow hover:shadow-md"
+              >
                 {ind.imageUrl && (
                   <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-sm bg-navy-900">
                     <Image
@@ -45,7 +49,7 @@ export default function IndustriesGrid({ industries = fallbackIndustries }: Indu
                       alt={lang === "zh" ? ind.title_zh : ind.title}
                       fill
                       sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                 )}
@@ -58,7 +62,7 @@ export default function IndustriesGrid({ industries = fallbackIndustries }: Indu
                 <p className="mt-2 text-sm leading-relaxed text-steel-600">
                   {lang === "zh" ? ind.description_zh : ind.description}
                 </p>
-              </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>

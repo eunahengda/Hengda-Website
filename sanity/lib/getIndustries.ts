@@ -1,5 +1,5 @@
 import { getSanityClient } from "./client";
-import { ALL_INDUSTRY_CATEGORIES_QUERY } from "./queries";
+import { ALL_INDUSTRY_CATEGORIES_QUERY, INDUSTRY_BY_SLUG_QUERY } from "./queries";
 import { industries as fallbackIndustries, type Industry } from "@/lib/data";
 
 /**
@@ -80,5 +80,44 @@ export async function getIndustryCategories(): Promise<Industry[]> {
       error
     );
     return fallbackIndustries;
+  }
+}
+
+/**
+ * Returns a single industry by slug for /industries/[slug], or null if it
+ * doesn't exist anywhere. Follows getIndustryCategories()'s fallback
+ * contract: tries Sanity first, falls back to lib/data.ts's hardcoded
+ * `industries` array (searched by slug) whenever Sanity isn't configured,
+ * has no matching document, or the request fails — never throws.
+ */
+export async function getIndustryBySlug(slug: string): Promise<Industry | null> {
+  const client = getSanityClient();
+  if (!client || !slug) {
+    return fallbackIndustries.find((industry) => industry.slug === slug) ?? null;
+  }
+
+  try {
+    const doc = await client.fetch<SanityIndustryCategory | null>(
+      INDUSTRY_BY_SLUG_QUERY,
+      { slug },
+      { next: { revalidate: 60 } }
+    );
+
+    if (!doc?.slug || !doc?.title) {
+      return fallbackIndustries.find((industry) => industry.slug === slug) ?? null;
+    }
+
+    return {
+      slug: doc.slug,
+      title: doc.title,
+      title_zh: doc.title_zh || doc.title,
+      icon: DEFAULT_SANITY_INDUSTRY_ICON,
+      description: doc.description ?? "",
+      description_zh: doc.description_zh || doc.description || "",
+      imageUrl: doc.imageUrl ?? undefined,
+    };
+  } catch (error) {
+    console.error(`[Sanity] Failed to fetch industry "${slug}":`, error);
+    return fallbackIndustries.find((industry) => industry.slug === slug) ?? null;
   }
 }
