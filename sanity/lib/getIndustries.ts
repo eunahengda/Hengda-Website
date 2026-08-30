@@ -45,7 +45,12 @@ export async function getIndustryCategories(): Promise<Industry[]> {
 
   try {
     const results = await client.fetch<SanityIndustryCategory[]>(
-      ALL_INDUSTRY_CATEGORIES_QUERY
+      ALL_INDUSTRY_CATEGORIES_QUERY,
+      {},
+      // Cached for speed, revalidated roughly every 60s so newly published
+      // industries show up without a rebuild or server restart — see
+      // sanity/lib/getProjects.ts for the same pattern applied to projects.
+      { next: { revalidate: 60 } }
     );
 
     const usable = (results ?? []).filter(

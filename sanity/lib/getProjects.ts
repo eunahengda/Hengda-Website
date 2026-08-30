@@ -127,6 +127,17 @@ function mapFeaturedProject(doc: SanityFeaturedProject): FeaturedProject | null 
 }
 
 /**
+ * Every `client.fetch()` call below passes `next: { revalidate: 60 }` so
+ * Next.js's fetch/Data Cache (which otherwise caches indefinitely and
+ * persists across dev-server restarts — the exact cause of Crane
+ * Shaft/Stamping not appearing) revalidates on roughly a 60s cadence
+ * instead of never. Content stays fast (cached) but newly published
+ * Sanity documents show up within about a minute, no rebuild or restart
+ * required.
+ */
+const REVALIDATE = { next: { revalidate: 60 } } as const;
+
+/**
  * Returns every published project (featured first, then newest). Follows
  * getIndustryCategories()'s never-throw contract — a Sanity hiccup or an
  * unconfigured project must never be able to break a page render.
@@ -140,7 +151,7 @@ export async function getAllProjects(): Promise<Project[]> {
   if (!client) return [];
 
   try {
-    const results = await client.fetch<SanityProject[]>(ALL_PROJECTS_QUERY);
+    const results = await client.fetch<SanityProject[]>(ALL_PROJECTS_QUERY, {}, REVALIDATE);
     return (results ?? []).map(mapProject).filter((p): p is Project => p !== null);
   } catch (error) {
     console.error("[Sanity] Failed to fetch projects — showing none:", error);
@@ -154,7 +165,11 @@ export async function getFeaturedProjects(): Promise<FeaturedProject[]> {
   if (!client) return [];
 
   try {
-    const results = await client.fetch<SanityFeaturedProject[]>(FEATURED_PROJECTS_QUERY);
+    const results = await client.fetch<SanityFeaturedProject[]>(
+      FEATURED_PROJECTS_QUERY,
+      {},
+      REVALIDATE
+    );
     return (results ?? [])
       .map(mapFeaturedProject)
       .filter((p): p is FeaturedProject => p !== null);
@@ -169,9 +184,11 @@ export async function getProjectsByIndustry(industrySlug: string): Promise<Proje
   if (!client || !industrySlug) return [];
 
   try {
-    const results = await client.fetch<SanityProject[]>(PROJECTS_BY_INDUSTRY_QUERY, {
-      industrySlug,
-    });
+    const results = await client.fetch<SanityProject[]>(
+      PROJECTS_BY_INDUSTRY_QUERY,
+      { industrySlug },
+      REVALIDATE
+    );
     return (results ?? []).map(mapProject).filter((p): p is Project => p !== null);
   } catch (error) {
     console.error(
@@ -192,7 +209,11 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   if (!client || !slug) return null;
 
   try {
-    const result = await client.fetch<SanityProject | null>(PROJECT_BY_SLUG_QUERY, { slug });
+    const result = await client.fetch<SanityProject | null>(
+      PROJECT_BY_SLUG_QUERY,
+      { slug },
+      REVALIDATE
+    );
     return result ? mapProject(result) : null;
   } catch (error) {
     console.error(`[Sanity] Failed to fetch project "${slug}":`, error);
