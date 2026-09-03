@@ -400,10 +400,35 @@ export const whyChooseUs = [
   },
 ];
 
-export const machineCapabilities = [
-  { label: "Max Turning Length", label_zh: "最大车削长度", value: "1,500", unit: "mm" },
-  { label: "Max Turning Diameter", label_zh: "最大车削直径", value: "400", unit: "mm" },
-  { label: "Milling Table Travel", label_zh: "铣床工作台行程", value: "1,000", unit: "mm" },
+export type MachineCapability = {
+  label: string;
+  label_zh: string;
+  value: string;
+  unit: string;
+  /**
+   * Optional caveat shown in small text under the label — used for the
+   * Lathe entry, since its length/diameter maximums come from different
+   * machines and shouldn't read as one machine's simultaneous capacity.
+   */
+  note?: string;
+  note_zh?: string;
+};
+
+export const machineCapabilities: MachineCapability[] = [
+  {
+    label: "Lathe Capacity",
+    label_zh: "车床加工能力",
+    value: "Up to 5,000 mm length / 2,950 mm diameter",
+    unit: "",
+    note: "Maximum dimensions depend on machine and workpiece requirements.",
+    note_zh: "最大尺寸依所使用机台及加工件需求而定。",
+  },
+  {
+    label: "Milling Capacity",
+    label_zh: "铣床加工能力",
+    value: "4,500 × 1,500 × 1,200",
+    unit: "mm",
+  },
   { label: "Tolerance Achievable", label_zh: "可达公差", value: "±0.02", unit: "mm" },
 ];
 
